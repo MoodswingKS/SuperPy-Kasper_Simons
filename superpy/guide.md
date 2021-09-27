@@ -32,8 +32,9 @@ python main.py auto
 
 
 ```python
-# pre requirement for conversion:
+# pre requirement:
 pip install pandas
+cd superpy
 
 # in terminal type:
 python main.py
