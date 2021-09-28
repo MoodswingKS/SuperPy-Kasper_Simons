@@ -57,8 +57,8 @@ help_sell = console.print(f"""
 You can type these commands to check the options available
 -p, --product           [green]Name of product sold[/green]
 -a, --amount            [green]Amount sold[/green]
--b, --buy_price         [green]At which price it was sold[/green]
--e, --expiration_date   [green]When it was sold(dd/mm/yyyy)[/green]
+-s, --sell_price        [green]At which price it was sold[/green]
+-sd, --sell_date        [green]When it was sold(dd/mm/yyyy)[/green]
 """)
 
 help_convert = console.print(f"""

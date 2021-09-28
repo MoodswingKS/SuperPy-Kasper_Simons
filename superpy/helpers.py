@@ -25,7 +25,7 @@ def getID(product_name):
 # CHECK IF DATE IS VALID IN PARSER ARGUMENTS
 def valid_date(s):
     try:
-        return datetime.strptime(s, "%d-%m-%Y").date()
+        return datetime.strptime(s, "%d/%m/%Y").date()
     except ValueError:
         msg = "Not a valid date: '{0}'.".format(s)
         raise argparse.ArgumentTypeError(msg)

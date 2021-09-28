@@ -22,7 +22,6 @@ class Inventory():
             if os.path.isfile(self.inventory_path):
                 with open(self.inventory_path, newline='') as csv_file:
                     reader = csv.reader(csv_file)
-                    next(reader, None)
                     for row in reader:
                         print(row)
 
@@ -74,7 +73,8 @@ class Bought():
             with open(self.bought_path, 'a', newline='') as csv_file:
                 id_product = getID(product_name)
                 writer = csv.writer(csv_file)
-                writer.writerow([id_product, product_name, amount, buy_price, exp_date])
+                new_exp_date = datetime.strftime(exp_date, "%d/%m/%Y")
+                writer.writerow([id_product, product_name, amount, buy_price, new_exp_date])
             csv_file.close()
 
 """
@@ -106,11 +106,13 @@ class Sold():
             with open(self.sold_path, 'a', newline='') as csv_file:
                 writer = csv.writer(csv_file, delimiter = ',', quotechar = '|', quoting = csv.QUOTE_MINIMAL)
                 id_product = self.sell_id
+                new_sell_date = datetime.strftime(sell_date, "%d/%m/%Y")
+
                 if amount > float(self.sell_amount):
                     msg = "Product amount not in inventory"
                     raise argparse.ArgumentError(msg)                
                 
-                writer.writerow([id_product, product_name, amount, sell_price, sell_date])
+                writer.writerow([id_product, product_name, amount, sell_price, new_sell_date])
             csv_file.close()
 
 
@@ -123,18 +125,16 @@ def getProfit(options):
     if os.path.isfile(super_sold.sold_path):
         with open(super_sold.sold_path, newline='') as sold_file:    
             reader = csv.reader(sold_file)
-            list_reader = list(reader)
-            for row in list_reader:
-                total = float(row[2]) * float(row[3])
-                price_a += total
+            for row in reader:
+                total_a = int(row[2]) * float(row[3])
+                price_a += total_a
             sold_file.close()
 
     if os.path.isfile(super_bought.bought_path):
         with open(super_bought.bought_path, newline='') as bought_file:
             reader = csv.reader(bought_file)
-            list_reader = list(reader)
-            for row in list_reader:
-                total = float(row[2]) * float(row[3])
+            for row in reader:
+                total = int(row[2]) * float(row[3])
                 price_b += total
             bought_file.close()
 
