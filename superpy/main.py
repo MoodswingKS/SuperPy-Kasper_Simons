@@ -4,6 +4,7 @@ from datetime import datetime
 from arg_functions import global_date, conversion, getProfit
 from arg_functions import super_inventory, super_bought, super_sold
 import parser_text
+from parser_text import credits
 from helpers import valid_date
 
 # Do not change these lines.
