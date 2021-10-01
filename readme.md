@@ -8,6 +8,7 @@ I created a CLT for any supermarket to be used.
 <inventory>     Check inventory of products
 <buy>           Buy product
 <sell>          Sell
+<update>        Update inventory based on sell/buy
 <convert>       Convert csv to html or json
 <remove>        Remove product from inventory if expired
 <eco>           Get the amount in costs, revenue and profit

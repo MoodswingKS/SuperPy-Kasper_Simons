@@ -21,6 +21,11 @@ $python main.py sell --product <PRODUCT> --amount <AMOUNT> --sell_price <PRICE> 
 ```python
 $python main.py inventory show
 ```
+### Update
+```python
+$python main.py update -t buy
+$python main.py update -t sell
+```
 ### Remove
 ```python
 $python main.py remove --day <day>
