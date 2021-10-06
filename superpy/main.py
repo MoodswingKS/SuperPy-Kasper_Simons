@@ -1,9 +1,9 @@
 # Imports
 import argparse
 from datetime import datetime
-from arg_functions import global_date, conversion, getProfit, auto_update
+from arg_functions import global_date, conversion, getProfit
 from arg_functions import super_inventory, super_bought, super_sold
-from parser_text import parser_text, help_me
+from parser_text import parser_text
 from helpers import valid_date
 
 # Do not change these lines.
@@ -17,8 +17,12 @@ def main():
     parser = argparse.ArgumentParser(description="SUPERPY")
     mainparsers = parser.add_subparsers(dest='options')
     mainparsers.required = True
-    
-    buy_parser = mainparsers.add_parser('buy', help=help_me)
+
+    # init parsers, needs to be done first
+    start_parser = mainparsers.add_parser('start')
+    start_parser.add_argument('start', type=str)
+    # buy parser
+    buy_parser = mainparsers.add_parser('buy')
     buy_parser.add_argument('-p', '--product', type=str, required=True)
     buy_parser.add_argument('-a', '--amount', type=int, default=1)
     buy_parser.add_argument('-b', '--buy_price', type=float, required=True)
@@ -28,7 +32,7 @@ def main():
     sell_parser.add_argument('-p', '--product', type=str, required=True)
     sell_parser.add_argument('-a', '--amount', type=int, default=1)
     sell_parser.add_argument('-s', '--sell_price', type=float, required=True)
-    sell_parser.add_argument('-sd', '--sell_date', type=valid_date, required=True)
+    sell_parser.add_argument('-sd', '--sell_date', type=valid_date, default=global_date('none'))
     # inventory parser
     inv_parser = mainparsers.add_parser('inventory')
     inv_parser.add_argument('show')
@@ -40,16 +44,13 @@ def main():
     rev_parser.add_argument('-o', '--option', type=str, required=True)
     # remove expired products parser
     remove_parser = mainparsers.add_parser('remove')
-    remove_parser.add_argument('-d', '--day', type=valid_date, default=global_date)
+    remove_parser.add_argument('-d', '--day', type=valid_date, default=global_date('none'))
     # convert parser
     conv_parser = mainparsers.add_parser('convert')
     conv_parser.add_argument('-t', '--type', type=str, required=True)
     # credits parser
     credit_parser = mainparsers.add_parser('credits')
     credit_parser.add_argument('super')
-    # updater
-    update_parser = mainparsers.add_parser('update')
-    update_parser.add_argument('-t', '--type', type=str, required=True)
     # help parser
     help_parser = mainparsers.add_parser('help')
     help_parser.add_argument('help')
@@ -58,7 +59,10 @@ def main():
     choose_args(args)
 
 def choose_args(args):
-    if args.options == 'inventory':
+    if args.options == 'start':
+        global_date('start')
+        parser_text('start')
+    elif args.options == 'inventory':
         print(super_inventory.options('show'))
     elif args.options == 'buy':
         super_bought.buy(args.product, args.amount, args.buy_price, args.exp_date)
@@ -74,9 +78,7 @@ def choose_args(args):
     elif args.options == 'eco':
         getProfit(args.option)
     elif args.options == 'advance':
-        global_date(args.days)
-    elif args.options == 'update':
-        auto_update(args.type)
+        global_date('days', args.days)
     elif args.options == 'help':
         parser_text('main')
 

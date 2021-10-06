@@ -1,14 +1,26 @@
-## Classes
+## get ID as string or int
 
-Through the use of classes, I've made a global path for each of the .csv paths. All of them can be used through the project, by simply accessing the class. 
+Through the use of a helper function called get_item_or_max, I've used the type() check to return either a string or integer.  
+If it's a string, my function to create an ID instantly knows the product is in inventory.  
+In the case of an integer, it knows the ID is created because the product or its expiration date has not been in inventory yet.
 
 ```python
-  def __init__(self):
-        self.bought_path = os.path.join(data_paths, 'bought.csv')
-```
-Which can be used by simply writing:
-```python
-        super_bought.bought_path
+def get_item_or_max(path, product_name, exp_date):
+    """
+    return id as a string or an int
+    """
+    exp_match = datetime.strftime(exp_date, '%d/%m/%Y')
+    max_value = 0
+    
+    for item in path:
+        if product_name == item[1] and exp_match == item[-1]:
+            return item[0]
+        elif product_name == item[1]:
+            new_id = f'{item[0]}{exp_date}'
+            new_id_string = new_id.replace('-', '')
+            return new_id_string
+        max_value = max(item[0])
+    return int(max_value) 
 ```
 
 ## Advance Time

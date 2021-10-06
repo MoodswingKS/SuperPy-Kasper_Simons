@@ -37,8 +37,8 @@ pip install rich
 cd superpy
 
 # in terminal type:
-python main.py
-# to see a list of options
+python main.py start start
+# to start using the CLT
 
 # example:
 python main.py buy -p Beer -a 12 -b 1.5 -e 28/09/2021

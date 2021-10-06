@@ -26,9 +26,16 @@ def parser_text(options):
         #       \/_____/   \/_/   \/_/  \/_/   \/_____/   \/_/ \/_/   \/_____/      
         #                                                                           
         """)
-
-    if options == 'main':
+    if options == 'start':
         console.print(f"""
+        #   ______     __  __     ______   ______     ______     ______   __  __    
+        #  /\  ___\   /\ \/\ \   /\  == \ /\  ___\   /\  == \   /\  == \ /\ \_\ \   
+        #  \ \___  \  \ \ \_\ \  \ \  _-/ \ \  __\   \ \  __<   \ \  _-/ \ \____ \  
+        #   \/\_____\  \ \_____\  \ \_\    \ \_____\  \ \_\ \_\  \ \_\    \/\_____\ 
+        #    \/_____/   \/_____/   \/_/     \/_____/   \/_/ /_/   \/_/     \/_____/ 
+        #                                                                           
+        #
+        
         You can type these commands to check the options available
         <inventory>     [green]Check inventory of products[/green]
         <buy>           [green]Buy product[/green]
@@ -40,6 +47,7 @@ def parser_text(options):
         <credits>       [green]See who made this[/green]
         """)
 
+    if options == 'main':
         console.print(f"""
         <inventory>     [green]INVENTORY[/green]
         You can type this command:
@@ -62,12 +70,6 @@ def parser_text(options):
         -a, --amount            [green]Amount sold[/green]
         -s, --sell_price        [green]At which price it was sold[/green]
         -sd, --sell_date        [green]When it was sold(dd/mm/yyyy)[/green]
-        """)
-
-        console.print(f"""
-        <update>     [green]INVENTORY[/green]
-        You can type this command:
-        [green]-t, --type       [green]buy / sell to adjust the inventory[/green]
         """)
 
         console.print(f"""
