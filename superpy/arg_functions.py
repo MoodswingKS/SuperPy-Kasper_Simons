@@ -125,20 +125,24 @@ class Sold():
     """
     def __init__(self):
         self.sold_path = os.path.join(data_paths, 'sell.csv')
+        self.sell_id = None
+        self.sell_amount = None
     
     def check_if_exists(self, product_name):
         inventory_path = csv_to_temporary_list('create_list', 'inventory.csv')
         
         for item in inventory_path:
             if product_name == item[1]:
-                id_product = item[0]
-                self.sell_id = id_product
-                self.sell_amount = item[2]
-                return product_name
-        msg = "Product not in inventory"
-        raise argparse.ArgumentTypeError(msg)
+                    id_product = item[0]
+                    self.sell_id = id_product
+                    self.sell_amount = item[2]
+                    return product_name
+        print('Product does not exist')
 
     def sell(self, product_name, amount, sell_price, sell_date):
+        if self.sell_id == None or self.sell_amount == None:
+            return
+
         with open(self.sold_path, 'a', newline='') as csv_file:
             writer = csv.writer(csv_file, delimiter = ',', quotechar = '|', quoting = csv.QUOTE_MINIMAL)
             # sell date becomes expiration date in getID?
@@ -147,8 +151,7 @@ class Sold():
             if sell_date:
                 new_sell_date = datetime.strftime(sell_date, "%d/%m/%Y")
             if amount > float(self.sell_amount):
-                msg = "Product amount not in inventory"
-                raise argparse.ArgumentError(msg)                
+                print('Can not sell. Product not in inventory')               
             updated_product = [id_product, product_name, amount, sell_price, new_sell_date]    
             writer.writerow(updated_product)
             super_inventory.update('sell', updated_product)

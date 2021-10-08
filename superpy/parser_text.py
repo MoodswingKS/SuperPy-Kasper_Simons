@@ -1,8 +1,6 @@
 from rich.console import Console
 console = Console()
 
-help_me = console.print('Type help help for more information')
-
 def parser_text(options):
     if options == 'credits':
         return console.print("""
@@ -40,11 +38,13 @@ def parser_text(options):
         <inventory>     [green]Check inventory of products[/green]
         <buy>           [green]Buy product[/green]
         <sell>          [green]Sell[/green]
-        <convert>       [green]Convert csv to html or json[/green]
+        <convert>       [green]Convert inventory csv to html or json[/green]
         <remove>        [green]Remove product from inventory if expired[/green]
         <eco>           [green]Get the amount in costs, revenue and profit[/green]
         <advance>       [green]Advance time in days [/green]
         <credits>       [green]See who made this[/green]
+
+        Type help help for more information
         """)
 
     if options == 'main':

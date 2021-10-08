@@ -1,7 +1,7 @@
 # Imports
 import argparse
 from datetime import datetime
-from arg_functions import global_date, conversion, getProfit
+from arg_functions import global_date, getProfit, conversion
 from arg_functions import super_inventory, super_bought, super_sold
 from parser_text import parser_text
 from helpers import valid_date
@@ -14,7 +14,7 @@ this_date = datetime.now().date()
 
 def main():
     # global parser init
-    parser = argparse.ArgumentParser(description="SUPERPY")
+    parser = argparse.ArgumentParser(description="SUPERPY", add_help=False)
     mainparsers = parser.add_subparsers(dest='options')
     mainparsers.required = True
 
